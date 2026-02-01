@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hogwarts Invitation</title>
+
+<style>
+/* Sfondo pergamena */
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: url('pergamena.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #3b2a1a;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Container principale con trasparenza leggera */
+.container {
+    max-width: 800px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.2); /* trasparente per far vedere la pergamena */
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 1;
+}
+
+h1 { font-size: 40px; margin-bottom: 20px; }
+h2 { font-weight: normal; margin-bottom: 20px; }
+p { font-size: 18px; line-height: 1.6; margin-bottom: 30px; }
+
+button {
+    background: #6b2e2e;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#letter {
+    display: none;
+    opacity: 0;
+    transition: opacity 2s;
+    margin-top: 20px;
+}
+
+#letter img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* Particelle magiche */
+.particle {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    pointer-events: none;
+    animation: float 3s ease-out forwards;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+    <h2>Welcome, young witch or wizard!</h2>
+    <p>
+        Hogwarts is a magical school hidden deep within the Scottish Highlands. 
+        For centuries, it has trained young witches and wizards in spells, potions, 
+        and magical creatures. Students are sorted into four unique houses, fostering 
+        friendship, courage, wisdom, and ambition. The castle is alive with enchantments, 
+        hidden passages, and secret treasures, offering adventures unlike any other.
+    </p>
+
+    <button onclick="revealLetter()">Check if you are magical</button>
+
+    <div id="letter">
+        <img src="lettera.jpeg" alt="Hogwarts Letter">
+    </div>
+</div>
+
+<script>
+// Mostra la lettera e crea particelle magiche
+function revealLetter() {
+    const letter = document.getElementById("letter");
+    letter.style.display = "block";
+    setTimeout(() => letter.style.opacity = 1, 100);
+    createParticles(50); // crea particelle magiche
+}
+
+// Genera particelle magiche
+function createParticles(count) {
+    for(let i=0;i<count;i++){
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.textContent = '✨';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = window.innerHeight + 'px';
+        particle.style.fontSize = (10 + Math.random()*20) + 'px';
+        particle.style.animationDuration = (2 + Math.random()*2) + 's';
+        document.body.appendChild(particle);
+        setTimeout(()=>particle.remove(), 4000);
+    }
+}
+</script>
+
+</body>
+</html>
